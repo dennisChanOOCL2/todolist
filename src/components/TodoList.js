@@ -1,47 +1,30 @@
-import React, { Component } from 'react';
-import { Button } from 'antd';
-import 'antd/dist/antd.css';
-// import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
+import React, {Component} from 'react';
+import Todo from "./Todo";
+import TodoListApi from "../apis/TodoListApi.js";
 
+export default class TodoList extends Component {
 
-class TodoList extends Component {
-
-    constructor(props){
+    constructor(props) {
         super(props);
-
-        this.updateTodoListStatus = this.updateTodoListStatus.bind(this);
-
-        this.state = {
-            id : this.props.id,
-            content : this.props.content,
-            status : this.props.status
-        };
     }
 
-    // updateTodoListStatus(e){
-    //
-    //     e.target.classList.toggle("strikeThrough");
-    //     this.setState((prevState)=>{
-    //         return {
-    //             status: !prevState.status
-    //         };
-    //     });
-    // }
-
-    updateTodoListStatus = e => {
-        e.target.classList.toggle("strikeThrough");
-    };
-
-    render(){
-        return(
+    render() {
+        const{toDoList, updateTodoStatus} = this.props;
+        return (
             <div>
-                <p key ={1} onClick={this.updateTodoListStatus}>
-                    HIHI123
-                </p>
+                {this.props.toDoList.map((toDo) => (
+                    <Todo
+                        key = {toDo.id}
+                        id = {toDo.id}
+                        content = {toDo.content}
+                        status = {toDo.status}
+                        updateTodoStatus = {updateTodoStatus}
+                    />
+                ))}
+
             </div>
-        )
+        );
     }
 
 
 }
-export default TodoList;
